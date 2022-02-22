@@ -8,14 +8,15 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  
+  const userContext = useContext(UserContext);
+  
   const handleRegistration = (data) => {
     userContext.isLogged = true;
     userContext.setAuth();
     console.log(data);
   };
 
-  const userContext = useContext(UserContext);
   
   const onSubmit = () => console.log('onSubmit');
   console.log(userContext.isLogged);

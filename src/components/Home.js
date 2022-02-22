@@ -1,9 +1,11 @@
-import {useState, useEffect} from "react";
-
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../App";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [pokemon, setPokemon] = useState({});
   const [number, setNumber] = useState(1);
+  const userContext = useContext(UserContext);
 
   useEffect(()=>{
     fetch(`https://pokeapi.co/api/v2/pokemon/${number}`)
@@ -23,17 +25,27 @@ export default function Home() {
 
   return(
     <div>
-      {pokemon.types === undefined ? (
-        <h2>Loading ...</h2>
+      {userContext.isLogged ? (
+        <>
+          {pokemon.types === undefined ? (
+            <h2>Loading ...</h2>
+          ) : (
+            <>
+              <p>name: {pokemon.name} </p>
+              <p>height: {pokemon.height}</p>
+              <p>weight: {pokemon.weight}</p>
+              <p>type: {pokemon.types[0].type.name}</p>
+            </>
+          )}
+          <button type="submit" onClick={randomNumber}>New pokemon</button>
+        </>
       ) : (
         <>
-          <p>name: {pokemon.name} </p>
-          <p>height: {pokemon.height}</p>
-          <p>weight: {pokemon.weight}</p>
-          <p>type: {pokemon.types[0].type.name}</p>
+          <p> You should be logined first! </p>
+          <Link to="/login">Login</Link>
+        
         </>
       )}
-      <button type="submit" onClick={randomNumber}>New pokemon</button>
     </div>
   )
 }
