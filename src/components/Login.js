@@ -1,8 +1,11 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function Login() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const handleRegistration = (data) => console.log(data);
 
   return (
@@ -15,13 +18,12 @@ export default function Login() {
             name="username"
             type="text"
             {...register("username", {
-              required: "Name is required",
-              maxLength: {
-                value: 15,
-                message: "Username can have 15 characters maximum",
-              },
-            })}
+              required: true,
+              maxLength: 15,
+              })}
+            placeholder="Username"
           />
+          {errors.username && <span>Username can't have more than 15 characters</span>}
         </div>
         <div>
           <label>Password</label>
@@ -29,13 +31,12 @@ export default function Login() {
             name="password"
             type="password"
             {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must have at least 6 characters",
-              },
-            })}
+              required: true,
+              minLength: 6,
+              })}
+            placeholder="Password"
           />
+          {errors.password && <span>Password must have at least 6 characters</span>}
         </div>
         <button>Submit</button>
       </form>
