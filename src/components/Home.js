@@ -18,7 +18,6 @@ export default function Home() {
   },[number]);
 
   const randomNumber = () => {
-    console.log('randomNumber');
     return setNumber(Math.floor(Math.random() *100) + 1);
   };
 
