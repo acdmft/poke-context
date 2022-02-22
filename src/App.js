@@ -6,6 +6,11 @@ import Login from "./components/Login";
 export default function App() {
   return (
     <BrowserRouter>
+      <nav>
+        <Link to="/">Home |</Link>
+        <Link to="/login">Login |</Link>
+      </nav>
+
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
