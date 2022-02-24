@@ -1,22 +1,33 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../App";
+import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { UserContext, PokemonContext } from "../App";
 import { Link } from "react-router-dom";
+import {PokemonContext, savedPokemons} from "../context/pokemonContext";
+
+
 
 export default function Home() {
   const [pokemon, setPokemon] = useState({});
   const [number, setNumber] = useState(1);
   const userContext = useContext(UserContext);
+  const pokemonContext = useContext(PokemonContext);
+
+  const checkPokemon = () => {
+
+  }
 
   useEffect(()=>{
-    fetch(`https://pokeapi.co/api/v2/pokemon/${number}`)
-      .then((res)=> res.json())
-      .then((res) => {
-        setPokemon(res);
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log("Error while fetching a pokemon")
-      });
+    
+      fetch(`https://pokeapi.co/api/v2/pokemon/${number}`)
+        .then((res)=> res.json())
+        .then((res) => {
+          setPokemon(res);
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log("Error while fetching a pokemon")
+        });
+    
   },[number]);
 
   const randomNumber = () => {

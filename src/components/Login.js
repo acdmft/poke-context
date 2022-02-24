@@ -12,9 +12,7 @@ export default function Login() {
   const userContext = useContext(UserContext);
   
   const handleRegistration = (data) => {
-    userContext.isLogged = true;
     userContext.setAuth();
-    console.log(data);
   };
 
   
@@ -56,11 +54,11 @@ export default function Login() {
           )}
         </div>
         {userContext.isLogged ? (
-          <button className="button" onClick={onSubmit}>
+          <button className="button" onClick={userContext.setAuth}>
             Se déconnecter
           </button>
         ) : (
-          <button className="button" type="submit">
+          <button className="button" type="submit" onClick={handleRegistration}>
             Se connecter
           </button>
         )}

@@ -3,12 +3,13 @@ import { BrowserRouter, Switch, Link, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 
-export const UserContext = createContext({isLogged: false}); 
+
+export const UserContext = createContext();
 
 export default function App() {
   const [isLogged, setLogged] = useState(false);
   const setAuth = () => {
-    setLogged(isLogged);
+    setLogged((prevLoogged) => !prevLogged);
   }
   const value = {isLogged: isLogged, setAuth: setAuth}
 
